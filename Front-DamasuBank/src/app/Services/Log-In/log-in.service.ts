@@ -56,7 +56,7 @@ export class LogInService {
   }
 
   login(email : string, password:string): Observable<any>{
-    return this.httpClientMine.post<any>("http://18.224.135.82:8080/users/login", {email : email, password : password})
+    return this.httpClientMine.post<any>("http://18.191.110.141:8080/users/login", {email : email, password : password})
   }
 
 }
