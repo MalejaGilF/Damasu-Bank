@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { TransactionsService } from '../../../Services/Transactions/transactions.service';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterOutlet, RouterModule } from '@angular/router';
+import { Store, select } from '@ngrx/store';
+import { AppState } from '../../../app.state';
+
 
 @Component({
   selector: 'app-pse',
@@ -54,9 +57,10 @@ export class PseComponent {
 
    sendlookingButton = false;
  
-   /*------------------------*/  
+   /*------------------------*/
+   Balance:any=[] 
 
-  constructor(private transactionsService:TransactionsService){
+  constructor(private transactionsService:TransactionsService, private store:Store<AppState> ){
 
     this.PSEinput = new FormGroup({
       id : new FormControl("",[Validators.required,Validators.minLength(1)]),
@@ -64,7 +68,16 @@ export class PseComponent {
     })
 
   }
-
+  ngOnInit(){
+    this.store.pipe(select("balance")).subscribe((value: number) => {
+      //console.log(value)
+      //this.Balance = value
+      const info = localStorage.getItem('valorBalance')
+      const valor:number = info ? JSON.parse(info) : 0
+      console.log(valor)
+      this.Balance = valor
+    })
+  }
   saveinfo(){
     const id = this.PSEinput.value.id
     const amount = this.PSEinput.value.request

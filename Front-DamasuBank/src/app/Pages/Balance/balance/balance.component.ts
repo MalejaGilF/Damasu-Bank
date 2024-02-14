@@ -10,6 +10,9 @@ import { RegisterService } from '../../../Services/Register/register.service';
 import { PseComponent } from '../../PSE/pse/pse.component';
 import { subscribe } from 'node:diagnostics_channel';
 import { validateHeaderValue } from 'node:http';
+import { Store,select } from '@ngrx/store';
+import { AppState } from '../../../app.state';
+import { setBalance } from '../../../Store/BalanceState/balance.actions';
 
 @Component({
   selector: 'app-balance',
@@ -124,7 +127,13 @@ export class BalanceComponent {
 
   /*-------------------------*/
 
-  constructor(private Login:LogInService, private transactionsService : TransactionsService , private apiService:ApiService, private registerService:RegisterService , private formBuilder: FormBuilder){
+  constructor(private Login:LogInService,
+     private transactionsService : TransactionsService ,
+      private apiService:ApiService, 
+      private registerService:RegisterService , 
+      private formBuilder: FormBuilder,
+      private store:Store<AppState>
+      ){
 
     this.chatGptRequest = new FormGroup({
       message : new FormControl(""),
@@ -170,8 +179,9 @@ export class BalanceComponent {
       this.Login.getinfoDataBase().subscribe({
         next: (info)=> {
           this.info = info
-          // const data = info[0].patrimony
-          // console.log(data)
+           const data = info[0].patrimony
+           console.log(data)
+           this.store.dispatch(setBalance({value:data}))
           // this.exactMoney = data
         } 
       }

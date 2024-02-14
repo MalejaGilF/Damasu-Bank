@@ -15,7 +15,7 @@ export class CdtService {
   }
   addCdtInfo(cdt:Cdt): Observable<Cdt> {
     return this.http.post<Cdt>(
-      'http://localhost:8080/cdtx/createCdt',
+      'http://18.224.135.82:8080/cdtx/createCdt',
       cdt
     );
   }
