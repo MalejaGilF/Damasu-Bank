@@ -124,15 +124,17 @@
   background-attachment: fixed;
   transition: transform 0.5s ease;
 }
-.custom-alert.valor {
-  display: block;
-  position: fixed;
-  top: 100px; /* Ajusta este valor según tus preferencias /
-  right: 0%;
-  / transform: translate(-50%, -50%); */
-  background-color: rgb(255, 237, 184);
-  color: black;
-  padding: 15px;
-  border-radius: 4px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+.custom-alert-valor {
+    display: block;
+    position: fixed;
+    top: 10px; /* Ajusta este valor según tus preferencias */
+    right: 0%;
+    /* transform: translate(-50%, -50%); */
+    background-color: rgb(52, 181, 224);;
+    color: black;
+    padding: 15px;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  
+  
 }
