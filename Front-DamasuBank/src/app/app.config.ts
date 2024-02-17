@@ -9,6 +9,7 @@ import { provideStore } from '@ngrx/store';
 import { reducers, metaReducers } from './reducers';
 import { provideState } from '@ngrx/store';
 import { balanceReducer } from './Store/BalanceState/balance.reducers';
+import { pseReducer } from './Store/PseNgrx/pse.reducers';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,5 +19,6 @@ export const appConfig: ApplicationConfig = {
     CdtService, 
     BsModalService, 
     provideStore(),
-    provideState({ name: 'balance' , reducer: balanceReducer })]
+    provideState({ name: 'balance' , reducer: balanceReducer }),
+    provideState({ name: 'pse' , reducer: pseReducer })]
 };

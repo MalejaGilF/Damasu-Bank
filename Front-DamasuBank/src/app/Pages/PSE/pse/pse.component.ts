@@ -5,7 +5,8 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { RouterOutlet, RouterModule } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { AppState } from '../../../app.state';
-
+import { setBalance, setBalancepse } from '../../../Store/BalanceState/balance.actions';
+import { setPse } from '../../../Store/PseNgrx/pse.actions';
 
 @Component({
   selector: 'app-pse',
@@ -60,6 +61,8 @@ export class PseComponent {
    /*------------------------*/
    Balance:any=[] 
 
+   Pse:any=[]
+
   constructor(private transactionsService:TransactionsService, private store:Store<AppState> ){
 
     this.PSEinput = new FormGroup({
@@ -87,13 +90,20 @@ export class PseComponent {
     this.money(id,amount)
   }
 
-  money(id:number, request:number) {
+  money(id:number, request:any) {
     this.transactionsService.sendMoneyPSE(id, request).subscribe({   
       next: (info)=>{
         console.log("Transaccion Exitosa se logro bro")
         this.sendButton = true;
         this.sendlookingButton = false;
         this.show()
+        const PseInfo = parseInt(request)
+        console.log(PseInfo)
+        this.store.dispatch(setPse({value:PseInfo}))
+        this.store.pipe(select("pse")).subscribe((value: number) => {
+          console.log(value)
+          this.Pse = value
+        })
       },
       error(err) {
           console.error(err)

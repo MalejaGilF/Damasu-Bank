@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store"
-import { setBalance, setBalancepse } from "./balance.actions";
+import { setPse } from "./pse.actions"
 
 //const initState: number=0;
 let initState : any = []
@@ -25,15 +25,10 @@ const localStorageInfo: any = () => {
 //const localStorageInfo = localStorage.getItem(balance)
 //const initState: number = localStorageInfo ? JSON.parse(localStorageInfo) : []
 
-export const balanceReducer = createReducer(
+export const pseReducer = createReducer(
   initState,
-  on(setBalance, (oldState, { value }) => {
+  on(setPse, (oldState, { value }) => {
     const newState = value
-    localStorage.setItem(balance, JSON.stringify(newState))
-    return newState
-  }),
-  on(setBalancepse, (oldState, { value }) => {
-    const newState = (oldState) + (value)
     localStorage.setItem(balance, JSON.stringify(newState))
     return newState
   })
